@@ -12,8 +12,9 @@ return new class extends Migration {
   {
     Schema::create('campus', function (Blueprint $table) {
       $table->id();
-      $table->string('nome', 255);
-      $table->string('sigla', 2);
+      $table->string('nome', 150);
+      $table->string('sigla', 4);
+      $table->text('descricao')->nullable();
       $table->timestamps();
     });
   }

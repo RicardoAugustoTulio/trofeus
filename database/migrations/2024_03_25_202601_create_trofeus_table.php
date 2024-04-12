@@ -17,8 +17,8 @@ return new class extends Migration {
       $table->year('ano');
       $table->tinyInteger('colocacao');
       $table->unsignedBigInteger('status_id');
-      $table->text('obs');
-      $table->string('url_imagem');
+      $table->text('obs')->nullable();
+      $table->string('url_imagem')->nullable();
       $table->timestamps();
 
       $table->foreign('campus_id')->references('id')->on('campus');

@@ -6,7 +6,6 @@
 <script src="{{ asset(mix('assets/vendor/js/menu.js')) }}"></script>
 <script src="{{ asset(mix('assets/js/function.js')) }}"></script>
 <script src="{{ asset(mix('assets/js/window.js')) }}"></script>
-<script src="{{asset('assets/js/dropzone.min.js')}}"></script>
 <script src="{{asset(mix('assets/js/select2.js'))}}"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"

@@ -22,13 +22,25 @@
         'menu' => [
             (object)[
                 'name' => 'Troféus',
-                'icon' => 'trophy-icon',
+                'icon' => 'bx bx-trophy',
                 'slug' => 'trofeus',
                 'submenu' => [
                     (object)[
-                        'url' => 'trofeus/listagem', // Presuma a URL correta para a listagem de troféus
+                        'url' => 'trofeus/listagem',
                         'name' => 'Listagem',
                         'slug' => 'trofeus-listagem'
+                    ]
+                ]
+            ],
+            (object)[
+                'name' => 'Campus',
+                'icon' => 'bx bx-building',
+                'slug' => 'campus',
+                'submenu' => [
+                    (object)[
+                        'url' => 'campus/listagem',
+                        'name' => 'Listagem',
+                        'slug' => 'campus-listagem'
                     ]
                 ]
             ]

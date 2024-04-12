@@ -55,7 +55,7 @@
               @endif
 
               <button type="button"
-                      onclick="enviarForm('{{route('salvar-exemplo')}}', 'form', '{{$metodo}}')"
+                      onclick="enviarDados('{{route('salvar-exemplo')}}', 'form', '{{$metodo}}')"
                       class="btn btn-primary">Salvar
               </button>
             </div>
