@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Campus\CampusController;
+use App\Http\Controllers\StatusTrofeuController;
 use App\Http\Controllers\Trofeu\TrofeuController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dashboard\Analytics;
@@ -29,5 +30,13 @@ Route::middleware('auth')->group(function () {
   Route::get('campus/editar/{campus}', [CampusController::class, 'editar'])->name('campus-editar');
   Route::put('campus/atualizar', [CampusController::class, 'atualizar'])->name('campus-atualizar');
   Route::delete('campus/deletar', [CampusController::class, 'deletar'])->name('campus-deletar');
+
+  //statusTrofeu
+  Route::get('status/listagem', [StatusTrofeuController::class, 'index'])->name('status-listagem');
+  Route::get('status/novo', [StatusTrofeuController::class, 'novo'])->name('status-novo');
+  Route::post('status/salvar', [StatusTrofeuController::class, 'salvar'])->name('status-salvar');
+  Route::get('status/editar/{status}', [StatusTrofeuController::class, 'editar'])->name('status-editar');
+  Route::put('status/atualizar', [StatusTrofeuController::class, 'atualizar'])->name('status-atualizar');
+  Route::delete('status/deletar', [StatusTrofeuController::class, 'deletar'])->name('status-deletar');
 });
 

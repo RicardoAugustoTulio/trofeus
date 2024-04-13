@@ -90,3 +90,15 @@ verModal = function(id) {
   var modalId = '#showModal-' + id;
   $(modalId).modal('show');
 };
+
+function gerarQRCode(elemento, url) {
+
+  new QRCode(elemento, {
+    text: url,
+    width: 128, // Default width
+    height: 128, // Default height
+    colorDark: '#000000', // Default dark color
+    colorLight: '#ffffff', // Default light color
+    correctLevel: QRCode.CorrectLevel.H // Default error correction level
+  });
+}

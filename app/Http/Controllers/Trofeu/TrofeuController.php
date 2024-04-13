@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Trofeu;
 
 use App\Http\Controllers\Controller;
-use App\Http\Services\TrofeuService;
+use App\Http\Services\Trofeu\TrofeuService;
 use Illuminate\Http\Request;
 
 class TrofeuController extends Controller

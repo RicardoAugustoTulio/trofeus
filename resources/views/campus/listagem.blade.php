@@ -49,3 +49,5 @@
 </div>
 {{$campusCollect->withQueryString()->links() }}
 
+<div id="teste">
+</div>

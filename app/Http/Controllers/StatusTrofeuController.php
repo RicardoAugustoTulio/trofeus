@@ -1,41 +1,40 @@
 <?php
 
-namespace App\Http\Controllers\Campus;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Http\Services\Campus\CampusService;
-use App\Models\Campus\Campus;
+use App\Http\Services\StatusTrofeu\StatusTrofeuService;
+use App\Models\StatusTrofeu\StatusTrofeu;
 use Illuminate\Http\Request;
 
-class CampusController extends Controller
+class StatusTrofeuController extends Controller
 {
   private $service;
 
   public function __construct()
   {
-    $this->service = new CampusService();
+    $this->service = new StatusTrofeuService();
   }
 
   public function index(Request $request)
   {
-    $campus = $this->service->buscar($request);
+    $status = $this->service->buscar($request);
 
-    return view('campus.index')
-      ->with('campus', $campus);
+    return view('status_trofeu.index')
+      ->with('status', $status);
   }
 
   public function novo()
   {
-    return view('campus.add');
+    return view('status_trofeu.add');
   }
 
   public function salvar(Request $request)
   {
 
     $regras = [
-      'nome' => 'required|max:150',
-      'sigla' => 'required|max:4',
+      'nome' => 'required|max:255',
     ];
+
     $mensagens = [
       'required' => 'O campo :attribute é obrigatório',
       'max' => 'O campo :attribute tem o limite máximo de :max caractéres.'
@@ -53,20 +52,18 @@ class CampusController extends Controller
     }
   }
 
-  public function editar($campus)
+  public function editar($status)
   {
-    $campus = Campus::findOrFail($campus);
-
-    return view('campus.edit')
-      ->with('campus', $campus);
+    $status = StatusTrofeu::findOrFail($status);
+    return view('status_trofeu.edit')
+      ->with('status', $status);
   }
 
   public function atualizar(Request $request)
   {
 
     $regras = [
-      'nome' => 'required|max:150',
-      'sigla' => 'required|max:4',
+      'nome' => 'required|max:255',
     ];
     $mensagens = [
       'required' => 'O campo :attribute é obrigatório',
@@ -92,7 +89,7 @@ class CampusController extends Controller
     } catch (\Exception $e) {
       return response(
         [
-          'title' => 'Erro!', 'text' => 'Algo deu errado ao deletar o campus!', 'icon' => 'error', 'confirmButtonText' => 'ok!'
+          'title' => 'Erro!', 'text' => 'Algo deu errado ao deletar o status!', 'icon' => 'error', 'confirmButtonText' => 'ok!'
         ], 500);
     }
   }

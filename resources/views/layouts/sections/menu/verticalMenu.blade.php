@@ -43,7 +43,19 @@
                         'slug' => 'campus-listagem'
                     ]
                 ]
-            ]
+            ],
+            (object)[
+                'name' => 'Status do Troféu',
+                'icon' => 'bx bx-check-shield',
+                'slug' => 'status',
+                'submenu' => [
+                    (object)[
+                        'url' => 'status/listagem',
+                        'name' => 'Listagem',
+                        'slug' => 'status-listagem'
+                    ]
+                ]
+            ],
         ]
     ]
 ];@endphp
