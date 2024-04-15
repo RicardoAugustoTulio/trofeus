@@ -1,18 +1,18 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Campus\CampusController;
-use App\Http\Controllers\StatusTrofeuController;
+use App\Http\Controllers\dashboard\Analytics;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\StatusTrofeu\StatusTrofeuController;
 use App\Http\Controllers\Trofeu\TrofeuController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\dashboard\Analytics;
-
-use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 
 // Main Page Route
-Route::get('/', [Analytics::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 Route::middleware('auth')->group(function () {
