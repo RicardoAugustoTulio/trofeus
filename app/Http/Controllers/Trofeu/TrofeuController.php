@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Trofeu;
 
 use App\Http\Controllers\Controller;
 use App\Http\Services\Trofeu\TrofeuService;
+use App\Models\Trofeu\Trofeu;
 use Illuminate\Http\Request;
 
 class TrofeuController extends Controller
@@ -32,13 +33,12 @@ class TrofeuController extends Controller
     }
   }
 
-  public function exemplo()
+  public function detalhes($trofeu)
   {
-    return view('trofeus.exemplo');
+   $trofeu = Trofeu::with('campus', 'status')->findOrFail($trofeu);
+
+    return view('pagina_trofeu.index')
+      ->with('trofeu', $trofeu);
   }
 
-  public function salvarExemplo(Request $request)
-  {
-    dd($request->all());
-  }
 }

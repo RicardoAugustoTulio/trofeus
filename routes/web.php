@@ -13,6 +13,7 @@ Route::post('/login', [LoginController::class, 'login']);
 
 // Main Page Route
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('trofeu/{trofeu}/{slug?}', [TrofeuController::class, 'detalhes'])->name('trofeu-detalhe');
 
 
 Route::middleware('auth')->group(function () {
@@ -20,9 +21,6 @@ Route::middleware('auth')->group(function () {
 
   //trofeus
   Route::get('trofeus/listagem', [TrofeuController::class, 'index'])->name('trofeus');
-  Route::get('exemplo', [TrofeuController::class, 'exemplo'])->name('exemplo');
-  Route::post('exemplo-salvar', [TrofeuController::class, 'salvarExemplo'])->name('salvar-exemplo');
-
   //campus
   Route::get('campus/listagem', [CampusController::class, 'index'])->name('campus-listagem');
   Route::get('campus/novo', [CampusController::class, 'novo'])->name('campus-novo');

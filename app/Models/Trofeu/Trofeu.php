@@ -21,11 +21,17 @@ class Trofeu extends Model
 
   public function campus()
   {
-    return $this->hasOne(Campus::class);
+    return $this->hasOne(Campus::class, 'id', 'campus_id');
   }
+
   public function status()
   {
-    return $this->hasOne(StatusTrofeu::class);
+    return $this->hasOne(StatusTrofeu::class, 'id', 'status_id');
+  }
+
+  public function modalidade()
+  {
+    return $this->hasOne(Modalidade::class);
   }
 
 }

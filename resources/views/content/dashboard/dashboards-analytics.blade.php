@@ -14,7 +14,7 @@
                         <div class="card-body d-flex flex-column justify-content-between">
                             <h5 class="card-title">{{ $trofeu->nome }}</h5>
                             <p class="card-trofeu-text card-text">{{ $trofeu->obs }}</p>
-                            <a href="" class="btn btn-primary card-btn">
+                            <a href="{{route('trofeu-detalhe',$trofeu->id)}}" class="btn btn-primary card-btn">
                                 <span class="align-middle">Detalhes</span>
                             </a>
                         </div>
