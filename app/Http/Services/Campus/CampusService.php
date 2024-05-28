@@ -33,7 +33,9 @@ class CampusService
     return response(
       [
         'title' => 'Sucesso!', 'text' => 'O campus foi adicionado com sucesso!', 'icon' => 'success', 'confirmButtonText' => 'OK!', 'reload' => 1
-      ], 200);
+      ],
+      200
+    );
   }
 
   public function atualizar($request)
@@ -45,7 +47,9 @@ class CampusService
     return response(
       [
         'title' => 'Sucesso!', 'text' => 'O campus foi atualizado com sucesso!', 'icon' => 'success', 'confirmButtonText' => 'OK!',  'reload' => 1
-      ], 200);
+      ],
+      200
+    );
   }
 
   public function deletar($request)
@@ -54,6 +58,8 @@ class CampusService
     return response(
       [
         'title' => 'Sucesso!', 'text' => 'O campus foi removido com sucesso!', 'icon' => 'success', 'confirmButtonText' => 'OK!',  'reload' => 1
-      ], 200);
+      ],
+      200
+    );
   }
 }
