@@ -3,6 +3,7 @@
 namespace App\Models\Trofeu;
 
 use App\Models\Campus\Campus;
+use App\Models\Modalidades\Modalidades;
 use App\Models\StatusTrofeu\StatusTrofeu;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,6 +18,9 @@ class Trofeu extends Model
     'ano',
     'colocacao',
     'status_id',
+    'modalidade_id',
+    'historia',
+    'obs',
   ];
 
   public function campus()
@@ -31,7 +35,14 @@ class Trofeu extends Model
 
   public function modalidade()
   {
-    return $this->hasOne(Modalidade::class);
+    return $this->hasOne(Modalidades::class, 'id', 'modalidade_id');
+  }
+
+  public function getRelacionadosAttribute()
+  {
+    $relacionados = Trofeu::where('modalidade_id', $this->modalidade_id)->where('id', '!=', $this->id)->get();
+
+    return $relacionados->count() ? $relacionados : collect();
   }
 
 }

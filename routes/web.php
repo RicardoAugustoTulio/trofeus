@@ -21,7 +21,12 @@ Route::middleware('auth')->group(function () {
   Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
   //trofeus
-  Route::get('trofeus/listagem', [TrofeuController::class, 'index'])->name('trofeus');
+  Route::get('trofeus/listagem', [TrofeuController::class, 'index'])->name('trofeus-listagem');
+  Route::get('trofeus/novo', [TrofeuController::class, 'novo'])->name('trofeus-novo');
+  Route::post('trofeus/salvar', [TrofeuController::class, 'salvar'])->name('trofeus-salvar');
+  Route::get('trofeus/editar/{trofeu}', [TrofeuController::class, 'editar'])->name('trofeus-editar');
+  Route::put('trofeus/atualizar', [TrofeuController::class, 'atualizar'])->name('trofeus-atualizar');
+  Route::delete('trofeus/deletar', [TrofeuController::class, 'deletar'])->name('trofeus-deletar');
   //campus
   Route::get('campus/listagem', [CampusController::class, 'index'])->name('campus-listagem');
   Route::get('campus/novo', [CampusController::class, 'novo'])->name('campus-novo');
@@ -34,7 +39,7 @@ Route::middleware('auth')->group(function () {
   Route::get('modalidades/listagem', [ModalidadesController::class, 'index'])->name('modalidades-listagem');
   Route::get('modalidades/novo', [ModalidadesController::class, 'novo'])->name('modalidades-novo');
   Route::post('modalidades/salvar', [ModalidadesController::class, 'salvar'])->name('modalidades-salvar');
-  Route::get('modalidades/editar/{modalidades}', [ModalidadesController::class, 'editar'])->name('modalidades-editar');
+  Route::get('modalidades/editar/{modalidade}', [ModalidadesController::class, 'editar'])->name('modalidades-editar');
   Route::put('modalidades/atualizar', [ModalidadesController::class, 'atualizar'])->name('modalidades-atualizar');
   Route::delete('modalidades/deletar', [ModalidadesController::class, 'deletar'])->name('modalidades-deletar');
 

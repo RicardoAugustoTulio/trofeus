@@ -60,6 +60,7 @@ enviarDados = async function(url, form, metodo) {
     }
   });
 };
+
 deletarDados = async function(url, form, metodo) {
   Swal.fire({
     title: 'Tem certeza?',
@@ -91,14 +92,51 @@ verModal = function(id) {
   $(modalId).modal('show');
 };
 
-function gerarQRCode(elemento, url) {
+gerarQRCode = function(elemento, url) {
 
   new QRCode(elemento, {
     text: url,
-    width: 128, // Default width
-    height: 128, // Default height
+    width: 300, // Default width
+    height: 300, // Default height
     colorDark: '#000000', // Default dark color
     colorLight: '#ffffff', // Default light color
     correctLevel: QRCode.CorrectLevel.H // Default error correction level
   });
-}
+};
+
+imprimirQrCode = function(elemento) {
+  var qrcodeElement = $('#' + elemento);
+  console.log(qrcodeElement)
+  // Create a new print window
+  var printWindow = window.open('', '', 'width=600,height=400');
+
+  // Clone the "qrcode" element and append it to the print window's document body
+  var clonedQRCode = qrcodeElement.clone();
+  printWindow.document.body.appendChild(clonedQRCode[0]);
+
+  // Focus on the print window and execute the print command
+  printWindow.focus();
+  printWindow.print();
+
+  // Close the print window after printing
+  printWindow.close();
+};
+
+tweetar = function(trofeu) {
+  // Extraindo dados do JSON
+  const nomeModalidade = trofeu.modalidade.nome;
+  const siglaCampus = trofeu.campus.sigla;
+  const nomeCampus = trofeu.campus.nome;
+  const ano = trofeu.ano;
+  const urlImagem = trofeu.url_imagem; // Opcional: URL da imagem do troféu
+  const linkPaginaAtual = window.location.href; // Link da página atual
+
+  // Montando o texto do tweet
+  const textoTweet = `Veja este troféu incrível de ${nomeModalidade}, conquistado pelo ${siglaCampus} - campus ${nomeCampus} em ${ano}! ${linkPaginaAtual} #trofeus #esporte #competição #${siglaCampus}`;
+
+  // Criando a URL do tweet
+  const urlTweet = `https://x.com/intent/tweet?text=${encodeURIComponent(textoTweet)}`;
+
+  // Tweetando!
+  window.open(urlTweet, '_blank');
+};

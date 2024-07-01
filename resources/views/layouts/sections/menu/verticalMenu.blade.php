@@ -56,6 +56,18 @@
                     ]
                 ]
             ],
+            (object)[
+                'name' => 'Modalidades',
+                'icon' => 'bx bxs-ball',
+                'slug' => 'modalidades',
+                'submenu' => [
+                    (object)[
+                        'url' => 'modalidades/listagem',
+                        'name' => 'Listagem',
+                        'slug' => 'modalidades-listagem'
+                    ]
+                ]
+            ],
         ]
     ]
 ];@endphp

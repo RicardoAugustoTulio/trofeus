@@ -1,17 +1,17 @@
 @extends('layouts/contentNavbarLayout')
 
-@section('title', 'Troféus - Gerenciar Troféus')
+@section('title', 'Modalidades - Gerenciar Modalidades')
 
 @section('content')
   <h4 class="fw-bold py-3 mb-4">
-    Gerenciar Troféus
+    Gerenciar Modalidades
   </h4>
   <div class="row">
     <div class="col-12">
-      @include('trofeus.busca')
+      @include('modalidades.busca')
     </div>
     <div class="col-12">
-      @include('trofeus.listagem', ['trofeus' => $trofeus])
+      @include('modalidades.listagem', ['modalidades' => $modalidades])
     </div>
   </div>
 @endsection

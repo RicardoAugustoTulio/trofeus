@@ -5,18 +5,48 @@
             action="">
         <div class="row">
           <div class="col-xl-4 col-md-6 col-sm-12 mb-4">
-            <label class="form-label" for="titulo_garantia">Título</label>
+            <label class="form-label" for="nome">Nome</label>
             <div class="input-group input-group-merge">
-              <input type="text" id="titulo_garantia" name="titulo_garantia" class="form-control">
+              <input type="text" id="nome" name="nome" class="form-control" value="{{request('nome')}}">
             </div>
           </div>
           <div class="col-xl-4 col-md-6 col-sm-12 mb-4">
-            <label class="form-label" for="garantia">Troféu</label>
+            <label class="form-label" for="campus">Campus</label>
             <div class="input-group">
-              <input type="text" id="garantia" name="garantia" class="form-control">
+              <select name="campus" class="form-control form-select">
+                <option value="">Selecione</option>
+                @foreach($campus as $campi)
+                  <option
+                    {{request('campus') == $campi->id ? 'selected' : ''}} value="{{$campi->id}}">{{ $campi->sigla . '-' . $campi->nome }}</option>
+                @endforeach
+              </select>
             </div>
           </div>
-
+          <div class="col-xl-4 col-md-6 col-sm-12 mb-4">
+            <label class="form-label" for="modalidade">Modalidade</label>
+            <div class="input-group">
+              <select name="modalidade" class="form-control form-select">
+                <option value="">Selecione</option>
+                @foreach($modalidades as $modalidade)
+                  <option
+                    {{request('modalidade') == $modalidade->id ? 'selected' : ''}}value="{{$modalidade->id}}">{{$modalidade->nome}}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+          <div class="col-xl-4 col-md-6 col-sm-12 mb-4">
+            <label class="form-label" for="ano">Ano</label>
+            <div class="input-group input-group-merge">
+              <input type="number" id="ano" name="ano" class="form-control" value="{{request('ano')}}">
+            </div>
+          </div>
+          <div class="col-xl-4 col-md-6 col-sm-12 mb-4">
+            <label class="form-label" for="colocacao">Colocação</label>
+            <div class="input-group input-group-merge">
+              <input type="number" id="colocacao" name="colocacao" class="form-control"
+                     value="{{request('colocacao')}}">
+            </div>
+          </div>
           <div class="col-xl-2 col-md-6 col-sm-12 mb-4">
             <label class="form-label invisible">Hidden Label</label>
             <div>
@@ -27,7 +57,7 @@
         </div>
       </form>
       <div class="col-12 d-flex justify-content-end">
-        <a class="btn btn-primary ml-auto mt-2" style="color:white;">Adicionar
+        <a href="{{route('trofeus-novo')}}" class="btn btn-primary ml-auto mt-2" style="color:white;">Adicionar
           Troféu</a>
       </div>
     </div>

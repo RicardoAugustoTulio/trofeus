@@ -19,7 +19,7 @@ return new class extends Migration {
       $table->unsignedBigInteger('status_id');
       $table->text('obs')->nullable();
       $table->string('url_imagem')->nullable();
-      $table->text('historia');
+      $table->text('historia')->nullable();
       $table->timestamps();
 
       $table->foreign('campus_id')->references('id')->on('campus');

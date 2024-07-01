@@ -1,8 +1,8 @@
 <?php
   // Variables
   return [
-    "creatorName" => "ThemeSelection",
-    "creatorUrl" => "https://themeselection.com",
+    "creatorName" => "CSB TEAM",
+    "creatorUrl" => "Ricardo Augusto Tulio, Christian Guilherme Leal de Melo e João Lucas Azevedo Melo Bezerra",
     "templateName" => "Sneat",
     "templateSuffix" => "Bootstrap 5 HTML Laravel Free Admin Template",
     "templateVersion" => "1.1.0",
