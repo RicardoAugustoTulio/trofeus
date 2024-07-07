@@ -19,7 +19,7 @@
             </h4>
             {{--                        <span class="category-name">{{$trofeu->modalidade ? $trofeu->modalidade->nome : 'Nome da Modalidade'}}</span>--}}
             <span
-              class="category-name">Nome da Modalidade</span>
+              class="category-name">{{$trofeu->modalidade?->nome}}</span>
             <div class="d-flex flex-row my-3">
               <div class="text-warning mb-1 me-2">
                 <span class="badge bg-label-primary ms-1">
@@ -35,29 +35,28 @@
               </span>
               </div>
             </div>
-            <p>
-              {{$trofeu->obs}}
-            </p>
-
             <div class="row">
               {{--              TODO da pra fazer um esquema de atributos dps, salvar em json sla, ou uma tabela add de atributos trofeu--}}
-              <dt class="col-3">Type:</dt>
-              <dd class="col-9">Regular</dd>
+              <dt class="col-3">Ano:</dt>
+              <dd class="col-9">{{ $trofeu->ano }}</dd>
 
-              <dt class="col-3">Color</dt>
-              <dd class="col-9">Brown</dd>
+              <dt class="col-3">Colocação:</dt>
+              <dd class="col-9">{{ $trofeu->colocacao }}</dd>
 
-              <dt class="col-3">Material</dt>
-              <dd class="col-9">Cotton, Jeans</dd>
+              <dt class="col-3">Campus</dt>
+              <dd class="col-9">{{ $trofeu->campus?->sigla . ' - ' . $trofeu->campus?->nome }}</dd>
 
-              <dt class="col-3">Brand</dt>
-              <dd class="col-9">Reebook</dd>
+              <dt class="col-3">Modalidade</dt>
+              <dd class="col-9">{{ $trofeu->modalidade?->nome }}</dd>
             </div>
 
             <hr />
-
-            <a href="#" class="btn btn-primary shadow-0">Compartilhar<i
-                class='ms-1 bx bxs-share bx-flip-horizontal'></i></a>
+            <p>
+              {{$trofeu->obs}}
+            </p>
+            <br />
+            <a href="#" class="btn btn-outline-info shadow-0" onclick="tweetar({{json_encode($trofeu)}})">Compartilhar<i
+                class='bx bxl-twitter ms-2'></i></a>
           </div>
         </main>
       </div>
@@ -70,17 +69,13 @@
       <div class="row gx-4">
         <div class="col-lg-8 mb-4">
           <div class="border-top border-info rounded-2 px-3 py-2 bg-white">
-            <h1 style="text-align: center;">História</h1>
+            <h1 style="text-align: center;" class="mt-4">História</h1>
             <!-- Pills content -->
             <div class="tab-content" id="ex1-content">
-              <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+              <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel"
+                   aria-labelledby="ex1-tab-1">
                 <p>
-                  With supporting text below as a natural lead-in to additional content. Lorem ipsum dolor sit amet,
-                  consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                  enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                  nulla
-                  pariatur.
+                  {!! $trofeu->historia  !!}
                 </p>
                 <div class="row mb-2">
                   <div class="col-12 col-md-6">
@@ -95,56 +90,30 @@
           <div class="px-0 border border-secondary  rounded-2 shadow-0">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Troféus Relacionados</h5>
-                <div class="d-flex mb-3">
-                  <a href="#" class="me-3">
-                    <img src="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/8.webp"
-                         style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" />
-                  </a>
-                  <div class="info">
-                    <a href="#" class="nav-link mb-1">
-                      Rucksack Backpack Large <br />
-                      Line Mounts
+                <h5 class="card-title mb-3">Troféus Relacionados</h5>
+                @foreach($trofeu->relacionados as $relacionado)
+                  @if($loop->first)
+                    <br />
+                  @endif
+                  <div class="d-flex mb-3">
+                    <a href="{{route('trofeu-detalhe',$relacionado->id)}}" class="me-3" target="_blank">
+                      <img
+                        src="https://acdn.mitiendanube.com/stores/003/013/677/products/trofeu_mundial_de_clubes_-30_cm_de_altura-_-31-b7b4ad9b40c987d81716839184714608-1024-1024.jpg"
+                        style="min-width: 96px; height: 96px;"
+                        class="img-md img-thumbnail" />
                     </a>
-                    <strong class="text-dark"> $38.90</strong>
+                    <div class="info">
+                      <a href="{{route('trofeu-detalhe',$relacionado->id)}}" class="nav-link mb-1" target="_blank">
+                        {{$relacionado->nome}} <br />
+                        {{$relacionado->ano}}
+                      </a>
+                      <strong class="text-dark">{{$relacionado->campus?->nome}}</strong>
+                    </div>
                   </div>
-                </div>
-
-                <div class="d-flex mb-3">
-                  <a href="#" class="me-3">
-                    <img src="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/9.webp"
-                         style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" />
-                  </a>
-                  <div class="info">
-                    <a href="#" class="nav-link mb-1">
-                      Summer New Men's Denim <br />
-                      Jeans Shorts
-                    </a>
-                    <strong class="text-dark"> $29.50</strong>
-                  </div>
-                </div>
-
-                <div class="d-flex mb-3">
-                  <a href="#" class="me-3">
-                    <img src="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/10.webp"
-                         style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" />
-                  </a>
-                  <div class="info">
-                    <a href="#" class="nav-link mb-1"> T-shirts with multiple colors, for men and lady </a>
-                    <strong class="text-dark"> $120.00</strong>
-                  </div>
-                </div>
-
-                <div class="d-flex">
-                  <a href="#" class="me-3">
-                    <img src="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/11.webp"
-                         style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" />
-                  </a>
-                  <div class="info">
-                    <a href="#" class="nav-link mb-1"> Blazer Suit Dress Jacket for Men, Blue color </a>
-                    <strong class="text-dark"> $339.90</strong>
-                  </div>
-                </div>
+                  @if(!$loop->last)
+                    <hr />
+                  @endif
+                @endforeach
               </div>
             </div>
           </div>

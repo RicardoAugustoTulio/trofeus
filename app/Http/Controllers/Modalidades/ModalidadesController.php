@@ -59,7 +59,7 @@ class ModalidadesController extends Controller
     $modalidades = Modalidades::findOrFail($modalidades);
 
     return view('modalidades.edit')
-      ->with('modalidades', $modalidades);
+      ->with('modalidade', $modalidades);
   }
 
   public function atualizar(Request $request)
