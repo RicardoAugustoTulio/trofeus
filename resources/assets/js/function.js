@@ -29,9 +29,6 @@ enviarDados = async function(url, form, metodo) {
         if (data.reload === 1) {
           location.reload();
         }
-        if (data.redirect) {
-          window.location.href = data.redirect;
-        }
       });
     },
     error: function(err) {
@@ -106,7 +103,7 @@ gerarQRCode = function(elemento, url) {
 
 imprimirQrCode = function(elemento) {
   var qrcodeElement = $('#' + elemento);
-  console.log(qrcodeElement)
+  console.log(qrcodeElement);
   // Create a new print window
   var printWindow = window.open('', '', 'width=600,height=400');
 
@@ -139,4 +136,20 @@ tweetar = function(trofeu) {
 
   // Tweetando!
   window.open(urlTweet, '_blank');
+};
+
+enviarPrompt = async function(url, form, metodo) {
+  $('#historia').val('Carregando...');
+  $('#historia').prop('disabled',true);
+  const formulario = $('#' + form).serialize();
+
+  await $.ajax({
+    type: metodo,
+    url: url,
+    data: formulario,
+    success: function(data) {
+      $('#historia').val(data);
+      $('#historia').prop('disabled',false);
+    }
+  });
 };

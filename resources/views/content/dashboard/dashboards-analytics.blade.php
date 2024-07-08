@@ -8,9 +8,7 @@
             @foreach ($trofeus as $trofeu)
                 <div class="col-md-4">
                     <div class="card mb-4 card-trofeu">
-                        <img
-                                src="https://acdn.mitiendanube.com/stores/003/013/677/products/trofeu_mundial_de_clubes_-30_cm_de_altura-_-31-b7b4ad9b40c987d81716839184714608-1024-1024.jpg"
-                                class="card-img-top" alt="{{ $trofeu->nome }}">
+                      <img src="{{ asset($trofeu->url_imagem) }}" width="285px" height="285px" class="card-img-top" alt="{{ $trofeu->nome }}">
                         <div class="card-body d-flex flex-column justify-content-between">
                             <h5 class="card-title">{{ $trofeu->nome }}</h5>
                             <p class="card-trofeu-text card-text">{{ $trofeu->obs }}</p>

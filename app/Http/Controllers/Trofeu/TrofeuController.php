@@ -16,6 +16,19 @@ class TrofeuController extends Controller
 
   private $service;
 
+  private array $regras = [
+    'nome' => 'required|max:255',
+    'ano' => 'required|max:4',
+    'colocacao' => 'required|max:2',
+    'campus_id' => 'required',
+    'modalidade_id' => 'required',
+    'status_id' => 'required',
+  ];
+  private array $mensagens = [
+    'required' => 'O campo :attribute é obrigatório',
+    'max' => 'O campo :attribute tem o limite máximo de :max caractéres.'
+  ];
+
   public function __construct()
   {
     $this->service = new TrofeuService();
@@ -23,13 +36,6 @@ class TrofeuController extends Controller
 
   public function index(Request $request)
   {
-//      $imageName = time() . '.' . $request->file->extension();
-//      $request->file->move(public_path('images'), $imageName);
-//      // Atualiza o caminho da imagem no banco de dados
-//      $path = 'images/' . $imageName;
-//      dd($path);
-//      //so pra salvar como salvar imagem
-////     acesso: <img src="{{ asset('images/1713068679.jpg') }}" alt="Imagem do troféu">
     $trofeus = $this->service->buscar($request);
     $modalidades = Modalidades::all();
     $campus = Campus::all();
@@ -64,6 +70,8 @@ class TrofeuController extends Controller
 
   public function salvar(Request $request)
   {
+    $request->validate($this->regras, $this->mensagens);
+
     try {
       return $this->service->salvar($request);
     } catch (\Exception $e) {
@@ -89,13 +97,12 @@ class TrofeuController extends Controller
 
   public function atualizar(Request $request)
   {
+    $request->validate($this->regras, $this->mensagens);
+
     try {
       return $this->service->atualizar($request);
     } catch (\Exception $e) {
-      return response(
-        [
-          'title' => 'Erro!', 'text' => 'Algo deu errado ao atualizar as informações!', 'icon' => 'error', 'confirmButtonText' => 'ok!'
-        ], 500);
+      return redirect()->back()->with('error', 'Algo deu errado ao atualizar o troféu');
     }
   }
 
@@ -106,7 +113,19 @@ class TrofeuController extends Controller
     } catch (\Exception $e) {
       return response(
         [
-          'title' => 'Erro!', 'text' => 'Algo deu errado ao atualizar as informações!', 'icon' => 'error', 'confirmButtonText' => 'ok!'
+          'title' => 'Erro!', 'text' => 'Algo deu errado ao deletar o troféu!', 'icon' => 'error', 'confirmButtonText' => 'ok!'
+        ], 500);
+    }
+  }
+
+  public function deletarImagem(Request $request)
+  {
+    try {
+      return $this->service->deletarImagem($request);
+    } catch (\Exception $e) {
+      return response(
+        [
+          'title' => 'Erro!', 'text' => 'Algo deu errado ao deletar a imagem!', 'icon' => 'error', 'confirmButtonText' => 'ok!'
         ], 500);
     }
   }

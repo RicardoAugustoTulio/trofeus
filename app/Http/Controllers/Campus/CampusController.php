@@ -90,6 +90,7 @@ class CampusController extends Controller
     try {
       return $this->service->deletar($request);
     } catch (\Exception $e) {
+      dd($e);
       return response(
         [
           'title' => 'Erro!', 'text' => 'Algo deu errado ao deletar o campus!', 'icon' => 'error', 'confirmButtonText' => 'ok!'

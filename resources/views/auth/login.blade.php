@@ -17,29 +17,31 @@
             <!-- Logo -->
             <div class="app-brand justify-content-center">
               <a href="{{url('/')}}" class="app-brand-link gap-2">
-                <span class="app-brand-logo demo">@include('_partials.macros',["width"=>25,"withbg"=>'var(--bs-primary)'])</span>
-                <span class="app-brand-text demo text-body fw-bold">{{config('variables.templateName')}}</span>
+                <img src="{{ asset('assets/img/avatars/1.jpg') }}" alt
+                     class="w-px-100 h-auto rounded-circle img-fluid">
               </a>
             </div>
+
             <!-- /Logo -->
-            <h4 class="mb-2">Welcome to {{config('variables.templateName')}}! 👋</h4>
-            <p class="mb-4">Please sign-in to your account and start the adventure</p>
+            <h4 class="mb-2 mt-2">Bem Vindo ao Gerenciador de Troféus👋</h4>
+            <p class="mb-2">Por favor, identifique-se.</p>
 
             <form id="formAuthentication" class="mb-3" action="{{route('login')}}" method="POST">
               @csrf
               <div class="mb-3">
-                <label for="email" class="form-label">Email or Username</label>
-                <input type="text" class="form-control" id="login" name="email" placeholder="Enter your email or username" autofocus>
+                <label for="email" class="form-label">Email</label>
+                <input type="text" class="form-control" id="login" name="email" placeholder="Insira seu e-mail"
+                       autofocus>
+                {!! $errors->has('email') ? "<span class='invalid text-danger'>".$errors->first('email')."</span>" : '' !!}
               </div>
               <div class="mb-3 form-password-toggle">
                 <div class="d-flex justify-content-between">
-                  <label class="form-label" for="password">Password</label>
-                  <a href="{{url('auth/forgot-password-basic')}}">
-                    <small>Forgot Password?</small>
-                  </a>
+                  <label class="form-label" for="password">Senha</label>
                 </div>
                 <div class="input-group input-group-merge">
-                  <input type="password" id="password" class="form-control" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" />
+                  <input type="password" id="password" class="form-control" name="password"
+                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                         aria-describedby="password" />
                   <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                 </div>
               </div>
@@ -47,26 +49,17 @@
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" id="remember-me">
                   <label class="form-check-label" for="remember-me">
-                    Remember Me
+                    Lembrar login
                   </label>
                 </div>
               </div>
               <div class="mb-3">
-                <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+                <button class="btn btn-primary d-grid w-100" type="submit">Entrar</button>
               </div>
             </form>
-
-            <p class="text-center">
-              <span>New on our platform?</span>
-              <a href="{{url('auth/register-basic')}}">
-                <span>Create an account</span>
-              </a>
-            </p>
           </div>
         </div>
       </div>
-      <!-- /Register -->
     </div>
-  </div>
   </div>
 @endsection

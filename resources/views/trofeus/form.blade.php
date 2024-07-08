@@ -1,8 +1,9 @@
 <div class="card border-top border-primary">
   <div class="card-body">
-    <form id="form" method="post">
+    <form id="form" method="post" action="{{route($route)}}" enctype="multipart/form-data">
       @csrf
       @if(isset($trofeu->id))
+        @method('put')
         <input type="hidden" name="id" id="id"
                value="{{$trofeu->id}}">
       @endif
@@ -17,14 +18,11 @@
                    name="nome"
                    value="{{ isset($trofeu->nome) ? $trofeu->nome : old('nome') }}" />
           </div>
+          {!!  $errors->has('nome') ? "<span class='invalid text-danger'>". $errors->first('nome') ."</span>" : '' !!}
         </div>
         <div class="col-sm-6">
           <label class="col-form-label" for="ano">
             Ano
-            {{--            <a type="button" data-bs-toggle="tooltip" data-bs-offset="0,4"--}}
-            {{--               data-bs-placement="top" data-bs-html="true" title=""--}}
-            {{--               data-bs-original-title="<span>Exemplo:</span>"><i--}}
-            {{--                class="bx bx-help-circle"></i></a>--}}
           </label>
           <div class="input-group input-group-merge">
             <span class="input-group-text"><i class='bx bxs-info-circle'></i></span>
@@ -32,14 +30,11 @@
                    name="ano"
                    value="{{ isset($trofeu->ano) ? $trofeu->ano : old('ano') }}" />
           </div>
+          {!!  $errors->has('ano') ? "<span class='invalid text-danger'>". $errors->first('ano') ."</span>" : '' !!}
         </div>
         <div class="col-sm-6">
           <label class="col-form-label" for="colocacao">
             Colocação
-            {{--            <a type="button" data-bs-toggle="tooltip" data-bs-offset="0,4"--}}
-            {{--               data-bs-placement="top" data-bs-html="true" title=""--}}
-            {{--               data-bs-original-title="<span>Exemplo:</span>"><i--}}
-            {{--                class="bx bx-help-circle"></i></a>--}}
           </label>
           <div class="input-group input-group-merge">
             <span class="input-group-text"><i class='bx bxs-info-circle'></i></span>
@@ -47,6 +42,7 @@
                    name="colocacao"
                    value="{{ isset($trofeu->colocacao) ? $trofeu->colocacao : old('colocacao') }}" />
           </div>
+          {!!  $errors->has('colocacao') ? "<span class='invalid text-danger'>". $errors->first('colocacao') ."</span>" : '' !!}
         </div>
         <div class="col-sm-6">
           <label class="col-form-label" for="obs">
@@ -58,6 +54,7 @@
                    name="obs"
                    value="{{ isset($trofeu->obs) ? $trofeu->obs : old('obs') }}" />
           </div>
+          {!!  $errors->has('obs') ? "<span class='invalid text-danger'>". $errors->first('obs') ."</span>" : '' !!}
         </div>
         <div class="col-sm-6">
           <label class="col-form-label" for="campus_id">
@@ -74,6 +71,7 @@
               @endforeach
             </select>
           </div>
+          {!!  $errors->has('campus_id') ? "<span class='invalid text-danger'>". $errors->first('campus_id') ."</span>" : '' !!}
         </div>
         <div class="col-sm-6">
           <label class="col-form-label" for="modalidade_id">
@@ -92,6 +90,7 @@
               @endforeach
             </select>
           </div>
+          {!!  $errors->has('modalidade_id') ? "<span class='invalid text-danger'>". $errors->first('modalidade_id') ."</span>" : '' !!}
         </div>
         <div class="col-sm-6">
           <label class="col-form-label" for="status">
@@ -109,29 +108,43 @@
               @endforeach
             </select>
           </div>
+          {!!  $errors->has('status_id') ? "<span class='invalid text-danger'>". $errors->first('status_id') ."</span>" : '' !!}
+        </div>
+        <div class="col-sm-6">
+          <label class="col-form-label" for="status">
+            Imagem
+          </label>
+          <div class="mb-3">
+            <input class="form-control" name="formFile" type="file" id="formFile">
+          </div>
+          @if(isset($trofeu) && !empty($trofeu->url_imagem))
+            <div class="d-flex align-items-center">
+              <img src="{{ asset($trofeu->url_imagem) }}" class="img-md img-thumbnail" width="100px"
+                   alt="Imagem do trofeu">
+              <button type="button" onclick="deletarDados('{{route('trofeus-deletar-imagem')}}','form','delete')"
+                      class="btn btn-danger btn-block ms-2">X
+              </button>
+            </div>
+          @endif
         </div>
         <div class="col-sm-12">
           <label class="col-form-label" for="obs_trofeu">
             História
+            <button type="button" class="btn btn-primary btn-sm"
+                    onclick="enviarPrompt('{{route('gemini-text')}}','form','post')">
+              Gerar com ia <i class="bx bxs-magic-wand"></i>
+            </button>
           </label>
           <div class="input-group input-group-merge">
-            <textarea name="historia" class="form-control"
+            <textarea name="historia" id="historia" class="form-control"
                       rows="7">{{isset($trofeu) ? $trofeu->historia : old('historia')}}</textarea>
-            {{--            @include('components.ckeditor', ['name' => 'obs_trofeu', 'descricao' => isset($trofeu) ? $trofeu->obs_trofeu : ''])--}}
           </div>
         </div>
       </div>
     </form>
     <div class="row mt-4">
       <div class="col">
-        @if (isset($trofeu->id))
-          @php $metodo = 'PUT' @endphp
-        @else
-          @php $metodo = 'POST' @endphp
-        @endif
-
-        <button type="button"
-                onclick="enviarDados('{{route($route)}}', 'form', '{{$metodo}}')"
+        <button type="submit" form="form"
                 class="btn btn-primary">Salvar
         </button>
       </div>
@@ -143,3 +156,27 @@
     </div>
   </div>
 </div>
+@push('js')
+
+  @if(session('success'))
+    <script>
+      Swal.fire({
+        title: 'Sucesso!',
+        text: '{{session('success')}}',
+        icon: 'success',
+        confirmButtonText: 'OK!'
+      });
+    </script>
+  @endif
+
+  @if(session('error'))
+    <script>
+      Swal.fire({
+        title: 'Erro!',
+        text: '{{session('error')}}',
+        icon: 'error',
+        confirmButtonText: 'OK!'
+      });
+    </script>
+  @endif
+@endpush

@@ -16,9 +16,7 @@
       @foreach($trofeus as $trofeu)
         <tr>
           <td>
-            <img src="https://premiartrofeus.com.br/wp-content/uploads/2023/04/Trofeu-Personalizado-Taca-Destaque.png"
-                 style="cursor: pointer;"
-                 width="50px" data-bs-toggle="modal" onclick="verModal({{$trofeu->id}})">
+            <img src="{{ asset($trofeu->url_imagem) }}" alt="Imagem do troféu" width="50px">
           </td>
           <td>
             <strong>{{$trofeu->nome}}</strong>

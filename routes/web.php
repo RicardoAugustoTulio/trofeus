@@ -2,9 +2,9 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Campus\CampusController;
-use App\Http\Controllers\Modalidades\ModalidadesController;
-use App\Http\Controllers\dashboard\Analytics;
+use App\Http\Controllers\Gemini\GeminiController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Modalidades\ModalidadesController;
 use App\Http\Controllers\StatusTrofeu\StatusTrofeuController;
 use App\Http\Controllers\Trofeu\TrofeuController;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +20,9 @@ Route::get('trofeu/{trofeu}/{slug?}', [TrofeuController::class, 'detalhes'])->na
 Route::middleware('auth')->group(function () {
   Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
+  //Gemini Text
+  Route::any('gemini/text', [GeminiController::class, 'index'])->name('gemini-text');
+
   //trofeus
   Route::get('trofeus/listagem', [TrofeuController::class, 'index'])->name('trofeus-listagem');
   Route::get('trofeus/novo', [TrofeuController::class, 'novo'])->name('trofeus-novo');
@@ -27,6 +30,7 @@ Route::middleware('auth')->group(function () {
   Route::get('trofeus/editar/{trofeu}', [TrofeuController::class, 'editar'])->name('trofeus-editar');
   Route::put('trofeus/atualizar', [TrofeuController::class, 'atualizar'])->name('trofeus-atualizar');
   Route::delete('trofeus/deletar', [TrofeuController::class, 'deletar'])->name('trofeus-deletar');
+  Route::delete('trofeus/deletar-imagem', [TrofeuController::class, 'deletarImagem'])->name('trofeus-deletar-imagem');
   //campus
   Route::get('campus/listagem', [CampusController::class, 'index'])->name('campus-listagem');
   Route::get('campus/novo', [CampusController::class, 'novo'])->name('campus-novo');

@@ -42,7 +42,7 @@
               <div class="nav-item d-flex align-items-center">
                 <i class="bx bx-search fs-4 lh-0"></i>
                 <input type="text" class="form-control border-0 shadow-none ps-1 ps-sm-2"
-                       placeholder="Search..." aria-label="Search...">
+                       placeholder="Buscar..." aria-label="Buscar...">
               </div>
             </div>
             <!-- /Search -->
@@ -80,17 +80,6 @@
                       </a>
                     </li>
                     <li>
-                      <div class="dropdown-divider"></div>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="javascript:void(0);">
-                        <i class="bx bx-user me-2"></i>
-                        <span class="align-middle">Perfil</span>
-                      </a>
-                    </li>
-
-                    <li>
-                      <div class="dropdown-divider"></div>
                     </li>
                     <li>
                       <a class="dropdown-item" href="{{route('logout')}}">

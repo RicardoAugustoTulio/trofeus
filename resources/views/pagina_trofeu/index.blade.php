@@ -8,8 +8,7 @@
       <div class="row gx-5">
         <aside class="col-lg-6">
           <div class="border border-warning rounded-4 mb-3 d-flex justify-content-center">
-            <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit"
-                 src="https://acdn.mitiendanube.com/stores/003/013/677/products/trofeu_mundial_de_clubes_-30_cm_de_altura-_-31-b7b4ad9b40c987d81716839184714608-1024-1024.jpg" />
+            <img src="{{ asset($trofeu->url_imagem) }}" width="428px" height="428px" class="rounded-4 fit" alt="{{ $trofeu->nome }}">
           </div>
         </aside>
         <main class="col-lg-6">
@@ -17,7 +16,6 @@
             <h4 class="title text-dark mb-4">
               {{$trofeu->nome}}
             </h4>
-            {{--                        <span class="category-name">{{$trofeu->modalidade ? $trofeu->modalidade->nome : 'Nome da Modalidade'}}</span>--}}
             <span
               class="category-name">{{$trofeu->modalidade?->nome}}</span>
             <div class="d-flex flex-row my-3">
@@ -36,7 +34,6 @@
               </div>
             </div>
             <div class="row">
-              {{--              TODO da pra fazer um esquema de atributos dps, salvar em json sla, ou uma tabela add de atributos trofeu--}}
               <dt class="col-3">Ano:</dt>
               <dd class="col-9">{{ $trofeu->ano }}</dd>
 
@@ -97,10 +94,7 @@
                   @endif
                   <div class="d-flex mb-3">
                     <a href="{{route('trofeu-detalhe',$relacionado->id)}}" class="me-3" target="_blank">
-                      <img
-                        src="https://acdn.mitiendanube.com/stores/003/013/677/products/trofeu_mundial_de_clubes_-30_cm_de_altura-_-31-b7b4ad9b40c987d81716839184714608-1024-1024.jpg"
-                        style="min-width: 96px; height: 96px;"
-                        class="img-md img-thumbnail" />
+                      <img src="{{ asset($relacionado->url_imagem) }}" class="img-md img-thumbnail" width="96px" height="96px" alt="{{ $trofeu->nome }}">
                     </a>
                     <div class="info">
                       <a href="{{route('trofeu-detalhe',$relacionado->id)}}" class="nav-link mb-1" target="_blank">
