@@ -38,19 +38,25 @@
 
           <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
             <!-- Search -->
-            <div class="navbar-nav align-items-center">
-              <div class="nav-item d-flex align-items-center">
-                <i class="bx bx-search fs-4 lh-0"></i>
-                <input type="text" class="form-control border-0 shadow-none ps-1 ps-sm-2"
-                       placeholder="Buscar..." aria-label="Buscar...">
-              </div>
+            <div class="col">
+              <form id="form-busca" action="{{route('busca')}}" style="margin-block-end:0 !important;">
+                <div class="navbar-nav align-items-center w-100">
+                  <div class="nav-item d-flex align-items-center flex-grow-1">
+                    <i class="bx bx-search fs-4 lh-0"></i>
+                    <input type="text" name="q" class="form-control border-0 shadow-none ps-1 ps-sm-2"
+                           placeholder="Busque por nome, campus ou modalidade" aria-label="Buscar..."
+                           value="{{request('q')}}">
+                  </div>
+                </div>
+              </form>
             </div>
             <!-- /Search -->
             <ul class="navbar-nav flex-row align-items-center ms-auto">
 
               <!-- Place this tag where you want the button to render. -->
               @guest
-                <a type="button" class="btn btn-outline-primary btn-sm" href="{{route('login')}}"><i class='bx bxs-lock-alt me-2' ></i>Login</a>
+                <a type="button" class="btn btn-outline-primary btn-sm" href="{{route('login')}}"><i
+                    class='bx bxs-lock-alt me-2'></i>Login</a>
               @endguest
               @auth
                 <!-- User -->

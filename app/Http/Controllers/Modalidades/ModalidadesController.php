@@ -11,6 +11,14 @@ class ModalidadesController extends Controller
 {
   private $service;
 
+  private array $regras = [
+    'nome' => 'required|max:255',
+  ];
+  private array $mensagens = [
+    'required' => 'O campo :attribute é obrigatório',
+    'max' => 'O campo :attribute tem o limite máximo de :max caractéres.'
+  ];
+
   public function __construct()
   {
     $this->service = new ModalidadesService();
@@ -31,17 +39,7 @@ class ModalidadesController extends Controller
 
   public function salvar(Request $request)
   {
-
-    $regras = [
-      'nome' => 'required|max:255',
-    ];
-    $mensagens = [
-      'required' => 'O campo :attribute é obrigatório',
-      'max' => 'O campo :attribute tem o limite máximo de :max caractéres.'
-    ];
-
-    $request->validate($regras, $mensagens);
-
+    $request->validate($this->regras, $this->mensagens);
     try {
       return $this->service->salvar($request);
     } catch (\Exception $e) {
@@ -64,17 +62,7 @@ class ModalidadesController extends Controller
 
   public function atualizar(Request $request)
   {
-
-    $regras = [
-      'nome' => 'required|max:150',
-    ];
-    $mensagens = [
-      'required' => 'O campo :attribute é obrigatório',
-      'max' => 'O campo :attribute tem o limite máximo de :max caractéres.'
-    ];
-
-    $request->validate($regras, $mensagens);
-
+    $request->validate($this->regras, $this->mensagens);
     try {
       return $this->service->atualizar($request);
     } catch (\Exception $e) {

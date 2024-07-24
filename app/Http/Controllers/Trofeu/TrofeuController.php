@@ -40,7 +40,6 @@ class TrofeuController extends Controller
     $modalidades = Modalidades::all();
     $campus = Campus::all();
 
-
     return view('trofeus.index')
       ->with('trofeus', $trofeus)
       ->with('modalidades', $modalidades)
@@ -71,7 +70,6 @@ class TrofeuController extends Controller
   public function salvar(Request $request)
   {
     $request->validate($this->regras, $this->mensagens);
-
     try {
       return $this->service->salvar($request);
     } catch (\Exception $e) {
@@ -98,7 +96,6 @@ class TrofeuController extends Controller
   public function atualizar(Request $request)
   {
     $request->validate($this->regras, $this->mensagens);
-
     try {
       return $this->service->atualizar($request);
     } catch (\Exception $e) {

@@ -14,6 +14,7 @@ Route::post('/login', [LoginController::class, 'login']);
 
 // Main Page Route
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('busca', [HomeController::class, 'buscar'])->name('busca');
 Route::get('trofeu/{trofeu}/{slug?}', [TrofeuController::class, 'detalhes'])->name('trofeu-detalhe');
 
 

@@ -5,6 +5,7 @@ namespace App\Models\Trofeu;
 use App\Models\Campus\Campus;
 use App\Models\Modalidades\Modalidades;
 use App\Models\StatusTrofeu\StatusTrofeu;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -37,6 +38,21 @@ class Trofeu extends Model
   {
     return $this->hasOne(Modalidades::class, 'id', 'modalidade_id');
   }
+
+  // Escopo de busca
+  public function scopeSearch(Builder $query, $searchTerm)
+  {
+    return $query->where('nome', 'LIKE', "%{$searchTerm}%")
+      ->orWhereHas('campus', function ($q) use ($searchTerm) {
+        $q->where('nome', 'LIKE', "%{$searchTerm}%")
+          ->orWhere('sigla', 'LIKE', "%{$searchTerm}%");
+      })
+      ->orWhereHas('modalidade', function ($q) use ($searchTerm) {
+        $q->where('nome', 'LIKE', "%{$searchTerm}%");
+      })
+      ->orWhere('ano', $searchTerm);
+  }
+
 
   public function getRelacionadosAttribute()
   {

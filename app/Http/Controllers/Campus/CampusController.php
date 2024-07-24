@@ -11,6 +11,15 @@ class CampusController extends Controller
 {
   private $service;
 
+  private array $regras = [
+    'nome' => 'required|max:150',
+    'sigla' => 'required|max:4',
+  ];
+  private array $mensagens = [
+    'required' => 'O campo :attribute é obrigatório',
+    'max' => 'O campo :attribute tem o limite máximo de :max caractéres.'
+  ];
+
   public function __construct()
   {
     $this->service = new CampusService();
@@ -31,18 +40,7 @@ class CampusController extends Controller
 
   public function salvar(Request $request)
   {
-
-    $regras = [
-      'nome' => 'required|max:150',
-      'sigla' => 'required|max:4',
-    ];
-    $mensagens = [
-      'required' => 'O campo :attribute é obrigatório',
-      'max' => 'O campo :attribute tem o limite máximo de :max caractéres.'
-    ];
-
-    $request->validate($regras, $mensagens);
-
+    $request->validate($this->regras, $this->mensagens);
     try {
       return $this->service->salvar($request);
     } catch (\Exception $e) {
@@ -63,18 +61,7 @@ class CampusController extends Controller
 
   public function atualizar(Request $request)
   {
-
-    $regras = [
-      'nome' => 'required|max:150',
-      'sigla' => 'required|max:4',
-    ];
-    $mensagens = [
-      'required' => 'O campo :attribute é obrigatório',
-      'max' => 'O campo :attribute tem o limite máximo de :max caractéres.'
-    ];
-
-    $request->validate($regras, $mensagens);
-
+    $request->validate($this->regras, $this->mensagens);
     try {
       return $this->service->atualizar($request);
     } catch (\Exception $e) {
@@ -90,7 +77,6 @@ class CampusController extends Controller
     try {
       return $this->service->deletar($request);
     } catch (\Exception $e) {
-      dd($e);
       return response(
         [
           'title' => 'Erro!', 'text' => 'Algo deu errado ao deletar o campus!', 'icon' => 'error', 'confirmButtonText' => 'ok!'
