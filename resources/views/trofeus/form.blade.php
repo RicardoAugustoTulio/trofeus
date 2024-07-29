@@ -136,8 +136,7 @@
             </button>
           </label>
           <div class="input-group input-group-merge">
-            <textarea name="historia" id="historia" class="form-control"
-                      rows="7">{{isset($trofeu) ? $trofeu->historia : old('historia')}}</textarea>
+            @include('_partials.summernote',['name' => 'historia', 'descricao' => isset($trofeu) ? $trofeu->historia : old('historia')])
           </div>
         </div>
       </div>

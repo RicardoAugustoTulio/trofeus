@@ -125,7 +125,6 @@ tweetar = function(trofeu) {
   const siglaCampus = trofeu.campus.sigla;
   const nomeCampus = trofeu.campus.nome;
   const ano = trofeu.ano;
-  const urlImagem = trofeu.url_imagem; // Opcional: URL da imagem do troféu
   const linkPaginaAtual = window.location.href; // Link da página atual
 
   // Montando o texto do tweet
@@ -139,17 +138,17 @@ tweetar = function(trofeu) {
 };
 
 enviarPrompt = async function(url, form, metodo) {
-  $('#historia').val('Carregando...');
-  $('#historia').prop('disabled',true);
   const formulario = $('#' + form).serialize();
+  $("#historia").summernote("code", 'Carregando...');
+  $('#historia').summernote('disable');
 
   await $.ajax({
     type: metodo,
     url: url,
     data: formulario,
     success: function(data) {
-      $('#historia').val(data);
-      $('#historia').prop('disabled',false);
+      $("#historia").summernote("code", data);
+      $('#historia').summernote('enable');
     }
   });
 };

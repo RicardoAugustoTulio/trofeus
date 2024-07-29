@@ -15,7 +15,7 @@ class GeminiController extends Controller
         try {
             $result = Gemini::geminiPro()->generateContent($this->montaPrompt($request));
 
-            $result = $result->text();
+            $result = str_replace(['```html','```'],'',$result->text());
 
             return response()->json($result);
         } catch (\Exception $e) {
@@ -27,11 +27,11 @@ class GeminiController extends Controller
     {
         $modalidade = Modalidades::find($request->modalidade_id);
         $campus = Campus::find($request->campus_id);
-        $prompt = "Escreva uma historia detalhada do " . $request->nome . " concedido em " . $request->ano . ".
+        $prompt = "Escreva uma historia GRANDE  em html  PARA POR EM UM EDITOR DE RICH TEXT detalhada do " . $request->nome . " concedido em " . $request->ano . ".
         Destaque e a relevância da premiação. Mencione também a modalidade
         (" . $modalidade?->nome . ") e o campus (" . $campus?->sigla . '-' . $campus?->nome . ")
          onde a conquista foi obtida.
-
+          UTILIZE MARCAÇÕES E TAGS HTML PARA ESTILIZAÇÃO
          informações adicionais:
          Historia do trofeu: $request->historia
          Colocacao:$request->colocacao

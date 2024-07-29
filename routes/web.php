@@ -6,6 +6,7 @@ use App\Http\Controllers\Gemini\GeminiController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Modalidades\ModalidadesController;
 use App\Http\Controllers\StatusTrofeu\StatusTrofeuController;
+use App\Http\Controllers\Summernote\SummernoteController;
 use App\Http\Controllers\Trofeu\TrofeuController;
 use Illuminate\Support\Facades\Route;
 
@@ -55,4 +56,8 @@ Route::middleware('auth')->group(function () {
   Route::get('status/editar/{status}', [StatusTrofeuController::class, 'editar'])->name('status-editar');
   Route::put('status/atualizar', [StatusTrofeuController::class, 'atualizar'])->name('status-atualizar');
   Route::delete('status/deletar', [StatusTrofeuController::class, 'deletar'])->name('status-deletar');
+
+  //Summernote
+  Route::post('summernote-upload',[SummernoteController::class,'upload'])->name("summernote-upload");
+  Route::delete('summernote-deletar-imagem',[SummernoteController::class,'deletarImagem'])->name('summernote-deletar-imagem');
 });
