@@ -2,7 +2,6 @@
   <div class="card-body">
     <form id="form" method="post">
       @csrf
-
       @if(isset($modalidade->id))
         <input type="hidden" name="id" id="id"
                value="{{$modalidade->id}}">
@@ -20,7 +19,7 @@
             <span class="input-group-text"><i class='bx bxs-info-circle'></i></span>
             <input type="text" class="form-control" id="nome"
                    name="nome"
-                   value="{{ isset($modalidade->nome) ? $modalidade->nome : '' }}" />
+                   value="{{ isset($modalidade->nome) ? $modalidade->nome : '' }}"/>
           </div>
         </div>
         <div class="col-sm-12">
@@ -28,7 +27,8 @@
             Descrição
           </label>
           <div class="input-group input-group-merge">
-            <textarea class="form-control" name="descricao" rows="5" placeholder="Descrição da modalidade">{{isset($modalidade->descricao) ? $modalidade->descricao : ''}}</textarea>
+            <textarea class="form-control" name="descricao" rows="5"
+                      placeholder="Descrição da modalidade">{{isset($modalidade->descricao) ? $modalidade->descricao : ''}}</textarea>
           </div>
         </div>
       </div>
@@ -40,7 +40,7 @@
         @else
           @php $metodo = 'POST' @endphp
         @endif
-        <button type="button"
+        <button type="button" id="submit"
                 onclick="enviarDados('{{route($route)}}', 'form', '{{$metodo}}')"
                 class="btn btn-primary">Salvar
         </button>
@@ -53,3 +53,13 @@
     </div>
   </div>
 </div>
+@push('js')
+  <script>
+    document.getElementById('form').addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        e.preventDefault(); // Previne o comportamento padrão de Enter
+        $('#submit').click()// Envia o formulário
+      }
+    });
+  </script>
+@endpush

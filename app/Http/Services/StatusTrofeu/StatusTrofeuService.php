@@ -46,7 +46,20 @@ class StatusTrofeuService
 
   public function deletar($request)
   {
-    StatusTrofeu::find($request->id)->delete();
+
+    $status = StatusTrofeu::find($request->id);
+
+    if ($status->trofeus) {
+      return response(
+        [
+          'title' => 'Vínculos Ativos!', 'text' => 'Existem troféus cadastrados com esse status! Vincule esses troféus a outro status para poder excluir esse.', 'icon' => 'warning', 'confirmButtonText' => 'OK!', 'reload' => 1
+        ],
+        500
+      );
+    }
+
+    $status->delete();
+
     return response(
       [
         'title' => 'Sucesso!', 'text' => 'O status foi removido com sucesso!', 'icon' => 'success', 'confirmButtonText' => 'OK!', 'reload' => 1

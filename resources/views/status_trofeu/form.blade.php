@@ -19,7 +19,7 @@
             <span class="input-group-text"><i class='bx bxs-info-circle'></i></span>
             <input type="text" class="form-control" id="nome"
                    name="nome"
-                   value="{{ isset($status->nome) ? $status->nome : '' }}" />
+                   value="{{ isset($status->nome) ? $status->nome : '' }}"/>
           </div>
         </div>
         <div class="col-sm-6">
@@ -29,7 +29,7 @@
           <div class="input-group input-group-merge">
             <input type="color" class="form-control" id="cor"
                    name="cor"
-                   value="{{ isset($status->cor) ? $status->cor : '' }}" />
+                   value="{{ isset($status->cor) ? $status->cor : '' }}"/>
           </div>
         </div>
       </div>
@@ -41,7 +41,7 @@
         @else
           @php $metodo = 'POST' @endphp
         @endif
-        <button type="button"
+        <button type="button" id="submit"
                 onclick="enviarDados('{{route($route)}}', 'form', '{{$metodo}}')"
                 class="btn btn-primary">Salvar
         </button>
@@ -54,3 +54,13 @@
     </div>
   </div>
 </div>
+@push('js')
+  <script>
+    document.getElementById('form').addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        e.preventDefault(); // Previne o comportamento padrão de Enter
+        $('#submit').click()// Envia o formulário
+      }
+    });
+  </script>
+@endpush

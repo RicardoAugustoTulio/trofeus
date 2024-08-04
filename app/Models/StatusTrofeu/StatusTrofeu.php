@@ -14,8 +14,8 @@ class StatusTrofeu extends Model
       'cor',
     ];
 
-  public function trofeu()
+  public function trofeus()
   {
-    return $this->belongsToMany(Trofeu::class);
+    return $this->belongsTo(Trofeu::class,'id','status_id');
   }
 }

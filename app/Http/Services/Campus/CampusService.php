@@ -46,7 +46,7 @@ class CampusService
 
     return response(
       [
-        'title' => 'Sucesso!', 'text' => 'O campus foi atualizado com sucesso!', 'icon' => 'success', 'confirmButtonText' => 'OK!',  'reload' => 1
+        'title' => 'Sucesso!', 'text' => 'O campus foi atualizado com sucesso!', 'icon' => 'success', 'confirmButtonText' => 'OK!', 'reload' => 1
       ],
       200
     );
@@ -54,10 +54,22 @@ class CampusService
 
   public function deletar($request)
   {
-    Campus::find($request->id)->delete();
+    $campus = Campus::find($request->id);
+
+    if ($campus->trofeus) {
+      return response(
+        [
+          'title' => 'Vínculos Ativos!', 'text' => 'Existem troféus cadastrados com esse campus! Vincule esses troféus a outro campus para poder excluir esse.', 'icon' => 'warning', 'confirmButtonText' => 'OK!', 'reload' => 1
+        ],
+        500
+      );
+    }
+
+    $campus->delete();
+
     return response(
       [
-        'title' => 'Sucesso!', 'text' => 'O campus foi removido com sucesso!', 'icon' => 'success', 'confirmButtonText' => 'OK!',  'reload' => 1
+        'title' => 'Sucesso!', 'text' => 'O campus foi removido com sucesso!', 'icon' => 'success', 'confirmButtonText' => 'OK!', 'reload' => 1
       ],
       200
     );

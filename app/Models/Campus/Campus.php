@@ -19,6 +19,6 @@ class Campus extends Model
 
   public function trofeus()
   {
-    return $this->belongsToMany(Trofeu::class);
+    return $this->belongsTo(Trofeu::class, 'id', 'campus_id');
   }
 }

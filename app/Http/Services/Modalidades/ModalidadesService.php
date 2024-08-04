@@ -46,7 +46,7 @@ class ModalidadesService
 
     return response(
       [
-        'title' => 'Sucesso!', 'text' => 'A modalidade foi atualizada com sucesso!', 'icon' => 'success', 'confirmButtonText' => 'OK!',  'reload' => 1
+        'title' => 'Sucesso!', 'text' => 'A modalidade foi atualizada com sucesso!', 'icon' => 'success', 'confirmButtonText' => 'OK!', 'reload' => 1
       ],
       200
     );
@@ -54,10 +54,22 @@ class ModalidadesService
 
   public function deletar($request)
   {
+
+    $modalidade = Modalidades::find($request->id);
+
+    if ($modalidade->trofeus) {
+      return response(
+        [
+          'title' => 'Vínculos Ativos!', 'text' => 'Existem troféus cadastrados com essa modalidade! Vincule esses troféus a outra modalidade para poder excluir essa.', 'icon' => 'warning', 'confirmButtonText' => 'OK!', 'reload' => 1
+        ],
+        500
+      );
+    }
+
     Modalidades::find($request->id)->delete();
     return response(
       [
-        'title' => 'Sucesso!', 'text' => 'A modalidade foi removida com sucesso!', 'icon' => 'success', 'confirmButtonText' => 'OK!',  'reload' => 1
+        'title' => 'Sucesso!', 'text' => 'A modalidade foi removida com sucesso!', 'icon' => 'success', 'confirmButtonText' => 'OK!', 'reload' => 1
       ],
       200
     );
