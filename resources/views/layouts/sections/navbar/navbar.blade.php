@@ -43,9 +43,10 @@
                 <div class="navbar-nav align-items-center w-100">
                   <div class="nav-item d-flex align-items-center flex-grow-1">
                     <i class="bx bx-search fs-4 lh-0"></i>
-                    <input type="text" name="q" class="form-control border-0 shadow-none ps-1 ps-sm-2"
+                    <input style="width: 40% !important;" type="text" name="q" id="busca" class="form-control border-0 shadow-none ps-1 ps-sm-2"
                            placeholder="Busque por nome, campus ou modalidade" aria-label="Buscar..."
                            value="{{request('q')}}">
+                    <button type="button" id="microfone" class="btn btn-primary btn-sm rounded-circle"><i class='bx bxs-microphone' ></i></button>
                   </div>
                 </div>
               </form>
@@ -106,3 +107,4 @@
       </nav>
       <!-- / Navbar -->
   </nav>
+@include('_partials.microfone_modal')

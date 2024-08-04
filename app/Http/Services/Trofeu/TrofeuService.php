@@ -4,7 +4,7 @@ namespace App\Http\Services\Trofeu;
 
 use App\Models\Trofeu\Trofeu;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class TrofeuService
 {
@@ -101,5 +101,32 @@ class TrofeuService
       200
     );
 
+  }
+
+  public function exportar($request)
+  {
+    $fileName = 'colecaoTrofeus' . time() . '.csv';
+    $data = $this->buscar($request);
+
+    $headers = [
+      'Content-Type' => 'text/csv',
+      'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
+      'Pragma' => 'no-cache',
+      'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
+      'Expires' => '0',
+    ];
+
+    $callback = function () use ($data) {
+      $file = fopen('php://output', 'w');
+      fputcsv($file, ['ID', 'Nome', 'Campus', 'Ano', 'Colocação', 'Status', 'Data de criação', 'Última atualização']);
+
+      foreach ($data as $row) {
+        $campus = $row->campus?->sigla . '-' . $row->campus?->nome;
+        fputcsv($file, [$row->id, $row->nome, $campus, $row->ano, $row->colocacao, $row->status?->nome, $row->created_at->format('d/m/Y H:i:s'), $row->updated_at->format('d/m/Y H:i:s')]);
+      }
+      fclose($file);
+    };
+
+    return new StreamedResponse($callback, 200, $headers);
   }
 }

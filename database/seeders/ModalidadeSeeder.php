@@ -14,8 +14,14 @@ class ModalidadeSeeder extends Seeder
     public function run(): void
     {
       DB::table('modalidades')->insert([
+        [
         'nome' => 'volei',
-        'descricao' => 'xd',
+        'descricao' => '123',
+        ],
+        [
+          'nome' => 'basquete',
+          'descricao' => '123'
+        ]
       ]);
     }
 }

@@ -127,4 +127,16 @@ class TrofeuController extends Controller
     }
   }
 
+  public function exportar(Request $request)
+  {
+    try {
+      return $this->service->exportar($request);
+    } catch (\Exception $e) {
+      return response(
+        [
+          'title' => 'Erro!', 'text' => 'Algo deu errado ao exportar os troféus!', 'icon' => 'error', 'confirmButtonText' => 'ok!'
+        ], 500);
+    }
+  }
+
 }

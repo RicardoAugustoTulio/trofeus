@@ -33,6 +33,10 @@ Route::middleware('auth')->group(function () {
   Route::put('trofeus/atualizar', [TrofeuController::class, 'atualizar'])->name('trofeus-atualizar');
   Route::delete('trofeus/deletar', [TrofeuController::class, 'deletar'])->name('trofeus-deletar');
   Route::delete('trofeus/deletar-imagem', [TrofeuController::class, 'deletarImagem'])->name('trofeus-deletar-imagem');
+
+  Route::get('trofeus/exportar', [TrofeuController::class, 'exportar'])->name('trofeus-exportar');
+  Route::post('trofeus/importar', [TrofeuController::class, 'importar'])->name('trofeus-importar');
+
   //campus
   Route::get('campus/listagem', [CampusController::class, 'index'])->name('campus-listagem');
   Route::get('campus/novo', [CampusController::class, 'novo'])->name('campus-novo');
@@ -58,6 +62,6 @@ Route::middleware('auth')->group(function () {
   Route::delete('status/deletar', [StatusTrofeuController::class, 'deletar'])->name('status-deletar');
 
   //Summernote
-  Route::post('summernote-upload',[SummernoteController::class,'upload'])->name("summernote-upload");
-  Route::delete('summernote-deletar-imagem',[SummernoteController::class,'deletarImagem'])->name('summernote-deletar-imagem');
+  Route::post('summernote-upload', [SummernoteController::class, 'upload'])->name("summernote-upload");
+  Route::delete('summernote-deletar-imagem', [SummernoteController::class, 'deletarImagem'])->name('summernote-deletar-imagem');
 });
