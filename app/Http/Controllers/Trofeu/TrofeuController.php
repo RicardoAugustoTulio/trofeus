@@ -23,10 +23,12 @@ class TrofeuController extends Controller
     'campus_id' => 'required',
     'modalidade_id' => 'required',
     'status_id' => 'required',
+    'formFile' => "dimensions:min_width=428,min_height=428"
   ];
   private array $mensagens = [
     'required' => 'O campo :attribute é obrigatório',
-    'max' => 'O campo :attribute tem o limite máximo de :max caractéres.'
+    'max' => 'O campo :attribute tem o limite máximo de :max caractéres.',
+    'dimensions' => 'A imagem deve ter pelo menos :min_width pixels de largura e :min_height pixels de altura.',
   ];
 
   public function __construct()

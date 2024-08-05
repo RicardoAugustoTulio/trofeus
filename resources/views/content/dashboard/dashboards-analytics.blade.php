@@ -8,10 +8,9 @@
             @foreach ($trofeus as $trofeu)
                 <div class="col-md-4">
                     <div class="card mb-4 card-trofeu">
-                      <img src="{{ asset($trofeu->url_imagem) }}" width="285px" height="285px" class="card-img-top" alt="{{ $trofeu->nome }}">
+                      <img src="{{ asset($trofeu->url_imagem) }}" style=" max-height: 428px" width="100%" height="100%" class="card-img-top" alt="{{ $trofeu->nome }}">
                         <div class="card-body d-flex flex-column justify-content-between">
                             <h5 class="card-title">{{ $trofeu->nome }}</h5>
-                            <p class="card-trofeu-text card-text">{{ $trofeu->obs }}</p>
                             <a href="{{route('trofeu-detalhe',$trofeu->id)}}" class="btn btn-primary card-btn">
                                 <span class="align-middle">Detalhes</span>
                             </a>

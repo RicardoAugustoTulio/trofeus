@@ -68,7 +68,5 @@ Route::middleware('auth')->group(function () {
 
   Route::get('perfil', [PerfilController::class, 'index'])->name('perfil');
   Route::post('salvar-perfil', [PerfilController::class, 'salvar'])->name('salvar-perfil');
-  Route::put('salvar-senha', [PerfilController::class, 'salvarSenha'])->name('salvar-senha');
-
 
 });

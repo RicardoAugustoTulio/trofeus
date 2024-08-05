@@ -125,6 +125,7 @@
                       class="btn btn-danger btn-block ms-2">X
               </button>
             </div>
+            {!!  $errors->has('formFile') ? "<span class='invalid text-danger'>". $errors->first('formFile') ."</span>" : '' !!}
           @endif
         </div>
         <div class="col-sm-12">

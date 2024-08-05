@@ -6,10 +6,9 @@
       ©
       <script>document.write(new Date().getFullYear());</script>
       , feito com ❤️ por
-      <a type="button" data-bs-toggle="tooltip" data-bs-offset="0,4"
-         data-bs-placement="top" data-bs-html="true" title="" class="footer-link fw-medium"
-         data-bs-original-title="<span>{{ (!empty(config('variables.creatorUrl')) ? config('variables.creatorUrl') : '') }}</span>">
-        {{ (!empty(config('variables.creatorName')) ? config('variables.creatorName') : '') }}</a>
+      <a type="button" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="<span>Ricardo Augusto Tulio, Christian Guilherme Leal de Melo e João Lucas Azevedo Melo Bezerra</span>">
+        <strong>{{ (!empty(config('variables.creatorName')) ? config('variables.creatorName') : '') }}</strong>
+      </a>
     </div>
     <div class="d-none d-lg-inline-block">
       <a href="{{ config('variables.licenseUrl') ? config('variables.licenseUrl') : '#' }}" class="footer-link me-4"

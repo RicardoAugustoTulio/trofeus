@@ -39,25 +39,35 @@
           <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
             <!-- Search -->
             <div class="col">
-              <form id="form-busca" action="{{route('busca')}}" style="margin-block-end:0 !important;">
+              <form id="form-busca" action="{{ route('busca') }}" style="margin-block-end:0 !important;">
                 <div class="navbar-nav align-items-center w-100">
                   <div class="nav-item d-flex align-items-center flex-grow-1">
                     <i class="bx bx-search fs-4 lh-0"></i>
-                    <input style="width: 40% !important;" type="text" name="q" id="busca" class="form-control border-0 shadow-none ps-1 ps-sm-2"
-                           placeholder="Busque por nome, campus ou modalidade" aria-label="Buscar..."
-                           value="{{request('q')}}">
-                    <button type="button" id="microfone" class="btn btn-primary btn-sm rounded-circle"><i class='bx bxs-microphone' ></i></button>
+                    <input
+                      type="text"
+                      name="q"
+                      id="busca"
+                      class="form-control border-0 shadow-none ps-1 ps-sm-2"
+                      placeholder="Busque por nome, campus ou modalidade"
+                      aria-label="Buscar..."
+                      value="{{ request('q') }}">
+                    <button type="button" id="microfone" class="btn btn-primary btn-sm rounded-circle">
+                      <i class='bx bxs-microphone'></i>
+                    </button>
                   </div>
                 </div>
               </form>
             </div>
-            <!-- /Search -->
-            <ul class="navbar-nav flex-row align-items-center ms-auto">
 
-              <!-- Place this tag where you want the button to render. -->
+            <!-- Separador vertical -->
+            <div class="vertical-separator"></div>
+
+            <!-- Botão de login e outros itens -->
+            <ul class="navbar-nav flex-row align-items-center ms-auto">
               @guest
-                <a type="button" class="btn btn-outline-primary btn-sm" href="{{route('login')}}"><i
-                    class='bx bxs-lock-alt me-2'></i>Login</a>
+                <a type="button" class="btn btn-outline-primary btn-sm" href="{{route('login')}}">
+                  <i class='bx bxs-lock-alt me-2'></i>Login
+                </a>
               @endguest
               @auth
                 <!-- User -->
@@ -112,3 +122,28 @@
       <!-- / Navbar -->
   </nav>
 @include('_partials.microfone_modal')
+<style>
+  #form-busca {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  #busca {
+    flex: 1; /* Faz com que o input ocupe o espaço restante disponível */
+    margin-right: 8px; /* Espaço entre o input e o botão */
+  }
+
+  #microfone {
+    flex-shrink: 0; /* Garante que o botão microfone não encolha */
+  }
+
+  .vertical-separator {
+    width: 1px; /* Largura da linha */
+    background-color: #ccc; /* Cor da linha (ajuste conforme necessário) */
+    height: 30px; /* Altura da linha, ajuste conforme necessário */
+    margin: 0 10px; /* Espaço ao redor da linha */
+    align-self: center; /* Alinha a linha vertical no centro dos itens adjacentes */
+  }
+
+</style>

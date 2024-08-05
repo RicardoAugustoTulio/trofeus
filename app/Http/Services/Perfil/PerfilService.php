@@ -9,7 +9,7 @@ class PerfilService
 
   public function salvar($request)
   {
-    $user = new User();
+    $user = auth()->user();
     $user->fill($request->all());
     $user->save();
 

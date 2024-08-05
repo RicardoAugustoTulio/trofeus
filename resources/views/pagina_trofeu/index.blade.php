@@ -49,7 +49,7 @@
 
             <hr />
             <p>
-              {{$trofeu->obs}}
+              {{!empty($trofeu->obs) ? 'Observações:' . $trofeu->obs : ''}}
             </p>
             <br />
             <a href="#" class="btn btn-outline-info shadow-0" onclick="tweetar({{json_encode($trofeu)}})">Compartilhar<i
