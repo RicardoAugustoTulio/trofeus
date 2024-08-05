@@ -87,6 +87,10 @@
                       </a>
                     </li>
                     <li>
+                      <a class="dropdown-item" href="{{route('perfil')}}">
+                        <i class='bx bx-cog me-2'></i>
+                        <span class="align-middle">Configurações</span>
+                      </a>
                     </li>
                     <li>
                       <a class="dropdown-item" href="{{route('logout')}}">

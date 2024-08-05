@@ -5,6 +5,7 @@ use App\Http\Controllers\Campus\CampusController;
 use App\Http\Controllers\Gemini\GeminiController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Modalidades\ModalidadesController;
+use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\StatusTrofeu\StatusTrofeuController;
 use App\Http\Controllers\Summernote\SummernoteController;
 use App\Http\Controllers\Trofeu\TrofeuController;
@@ -64,4 +65,10 @@ Route::middleware('auth')->group(function () {
   //Summernote
   Route::post('summernote-upload', [SummernoteController::class, 'upload'])->name("summernote-upload");
   Route::delete('summernote-deletar-imagem', [SummernoteController::class, 'deletarImagem'])->name('summernote-deletar-imagem');
+
+  Route::get('perfil', [PerfilController::class, 'index'])->name('perfil');
+  Route::post('salvar-perfil', [PerfilController::class, 'salvar'])->name('salvar-perfil');
+  Route::put('salvar-senha', [PerfilController::class, 'salvarSenha'])->name('salvar-senha');
+
+
 });
