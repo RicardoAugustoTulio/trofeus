@@ -22,6 +22,7 @@ class Trofeu extends Model
     'modalidade_id',
     'historia',
     'obs',
+    'competicao'
   ];
 
   public function campus()

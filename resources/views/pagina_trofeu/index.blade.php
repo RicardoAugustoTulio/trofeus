@@ -45,6 +45,9 @@
 
               <dt class="col-3">Modalidade</dt>
               <dd class="col-9">{{ $trofeu->modalidade?->nome }}</dd>
+
+              <dt class="col-3">Competição</dt>
+              <dd class="col-9">{{ $trofeu->competicao }}</dd>
             </div>
 
             <hr />

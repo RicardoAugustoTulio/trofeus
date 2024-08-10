@@ -20,6 +20,7 @@ return new class extends Migration {
       $table->text('obs')->nullable();
       $table->string('url_imagem')->nullable();
       $table->text('historia')->nullable();
+      $table->text('competicao')->nullable();
       $table->timestamps();
 
       $table->foreign('campus_id')->references('id')->on('campus');
