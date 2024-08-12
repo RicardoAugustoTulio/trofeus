@@ -46,6 +46,8 @@ class TrofeuService
       $request->file('formFile')->move(public_path('images'), $imageName);
       $path = 'images/' . $imageName;
       $trofeu->url_imagem = $path;
+    } else {
+      $trofeu->url_imagem = "images/1723489687.png";
     }
 
     $trofeu->save();
@@ -66,6 +68,9 @@ class TrofeuService
       $trofeu->url_imagem = $path;
     }
 
+    if (empty($trofeu->url_imagem) && !$request->hasFile('formFile')) {
+      $trofeu->url_imagem = "images/1723489687.png";
+    }
 
     $trofeu->save();
 

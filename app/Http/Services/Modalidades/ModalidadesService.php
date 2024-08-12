@@ -28,6 +28,13 @@ class ModalidadesService
 
     $modalidades = new Modalidades();
     $modalidades->fill($request->all());
+
+    if (Modalidades::where('nome', 'like', $request->nome)->first()) {
+      return response([
+        'title' => 'Erro!', 'text' => 'Já existe uma modalidade com esse nome!', 'icon' => 'error', 'confirmButtonText' => 'ok!'
+      ], 500);
+    }
+
     $modalidades->save();
 
     return response(
